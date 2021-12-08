@@ -14,8 +14,9 @@ hi Character guifg=#AA5599
 hi Comment guifg=#884488
 
 hi Special guifg=#FF88AA
+hi Delimiter guifg=#FF77FF
 
-hi Identifier guifg=#BBBBBB
+hi Identifier guifg=#EE55EE
 
 hi Statement guifg=#FF8800 gui=Bold cterm=Bold
 hi link Repeat Conditional
@@ -35,7 +36,5 @@ hi Macro guifg=#FF0000 gui=Bold cterm=Bold
 hi Normal guifg=#EEEEEE guibg=#181818
 
 hi LineNr guifg=#004488
-
-hi Identifier guifg=#CCAAFF
 
 hi Function guifg=#FFBBFF
