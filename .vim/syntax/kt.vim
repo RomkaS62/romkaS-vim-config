@@ -10,7 +10,7 @@ hi link KtInteger Identifier
 syn keyword KtConditional if else when
 hi link KtConditional Conditional
 
-syn keyword KtExcpetion try catch finally
+syn keyword KtExcpetion try catch finally throw
 hi link KtExcpetion Exception
 
 syn keyword KtKeyword get set
@@ -61,10 +61,13 @@ syn match KtInteger /\<\(0x[0-9a-fA-F]\+\|[0-9]\+\|0[0-7]\+\)\(L\)\=\>/
 hi link KtInteger Number
 
 syn match KtStringEscape /\\t\|\\n\|\\e/ contained
-hi link KtStringEscape SpecialChar
-
-syn region KtString start="\"" end="\"" contains=KtStringEscape oneline
+syn region KtStringTemplateBlock start="\${" end="}" contained
+syn match KtStringTemplateParameter /\$[a-zA-Z_][a-zA-Z_0-9]\+/ contained
+syn region KtString start="\"" skip="\\\"" end="\"" oneline contains=KtStringTemplateBlock,KtStringTemplateParameter,KtStringEscape
 hi link KtString String
+hi link KtStringTemplateParameter Special
+hi link KtStringTemplateBlock Special
+hi link KtStringEscape SpecialChar
 
 syn region KtOneLineComment start="//" end="$"
 syn region KtMultiLineComment start="/\*" end="\*/"
@@ -72,7 +75,7 @@ hi link KtMultiLineComment KtComment
 hi link KtOneLineComment KtComment
 hi link KtComment Comment
 
-syn keyword KtStandardFunctions with apply let also run toString toByte toInt toLong indices reversed
+syn keyword KtStandardFunctions also apply indices let reversed run toByte toInt toLong toString with zip
 hi link KtStandardFunctions Function
 
 syn keyword KtBuiltInType Byte Short Int Long Boolean
@@ -83,6 +86,9 @@ hi link KtStandardTypes Type
 
 syn region KtBlock start="{" end="}" contains=ALL
 hi link KtBlock Delimiter
+
+syn region KtParen start="(" end=")" contains=ALL
+hi link KtParen Delimiter
 
 syn match KtKosherContantName /\<[A-Z_][A-Z0-9_]\+\>/
 hi link KtKosherContantName Constant

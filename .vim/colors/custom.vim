@@ -37,4 +37,4 @@ hi Normal guifg=#EEEEEE guibg=#181818
 
 hi LineNr guifg=#004488
 
-hi Function guifg=#FFBBFF
+hi Function guifg=#FF4488 gui=Bold term=Bold
