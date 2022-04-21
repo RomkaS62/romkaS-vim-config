@@ -3,3 +3,6 @@ hi link cStandardFunctions Function
 
 syn match cFixedSizeIntFormat /\<PRI[ux]\(8\|16\|32\|64\)\>/
 hi link cFixedSizeIntFormat Constant
+
+syn keyword cRestrict restrict
+hi link cRestrict Type

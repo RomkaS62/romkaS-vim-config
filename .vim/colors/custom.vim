@@ -33,8 +33,10 @@ hi ColorColumn guibg=#241818
 hi PreProc guifg=#FF66BB
 hi Macro guifg=#FF0000 gui=Bold cterm=Bold
 
-hi Normal guifg=#EEEEEE guibg=#181818
+hi Normal guifg=#EEEEEE guibg=#1C1616
 
 hi LineNr guifg=#004488
 
 hi Function guifg=#FF4488 gui=Bold term=Bold
+
+hi Folded guibg=#331100
