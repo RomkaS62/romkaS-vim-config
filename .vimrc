@@ -16,6 +16,7 @@ au! BufWritePre * %s/\s\+$//e
 if has('nvim')
 	set showmode
 	set guicursor=n-v-c-i:block
+	set signcolumn=yes
 
 	lua require('plugins')
 	lua require('lspconfig').clangd.setup{}
