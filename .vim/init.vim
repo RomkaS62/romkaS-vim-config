@@ -1,1 +1,1 @@
-/home/gramelis/.vimrc
+/home/net-mazeikisra/.vimrc

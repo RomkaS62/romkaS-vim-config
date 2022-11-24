@@ -28,10 +28,13 @@ hi Exception guifg=#FF4400
 hi Type guifg=#77FF44
 
 hi SpecialKey guifg=#004080
-hi ColorColumn guibg=#241818
+hi ColorColumn guibg=#361818
 
 hi PreProc guifg=#FF66BB
+hi Define guifg=#FF0000 gui=Bold cterm=Bold
 hi Macro guifg=#FF0000 gui=Bold cterm=Bold
+hi Include guifg=#8080A0
+hi PreCondit guifg=#FF9944
 
 hi Normal guifg=#EEEEEE guibg=#1C1616
 
@@ -40,3 +43,4 @@ hi LineNr guifg=#004488
 hi Function guifg=#FF4488 gui=Bold term=Bold
 
 hi Folded guibg=#331100
+hi SignColumn guibg=#1C1616

@@ -5,13 +5,16 @@ set list
 set listchars=tab:>-,trail:~
 set nohlsearch
 set ts=4 sw=4
+set formatoptions=croq
 
 if &t_Co >= 256
 	set termguicolors
-	colo custom
+	colo warmnfuzzy
 endif
 
 au! BufWritePre * %s/\s\+$//e
+
+set tags=./tags;/
 
 if has('nvim')
 	set showmode
@@ -19,7 +22,7 @@ if has('nvim')
 	set signcolumn=yes
 
 	lua require('plugins')
-	lua require('lspconfig').clangd.setup{}
+	lua require('clangdconf')
 
 	tnoremap <Esc> <C-\><C-n>
 

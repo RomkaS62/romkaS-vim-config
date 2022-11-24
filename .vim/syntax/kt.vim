@@ -82,7 +82,7 @@ hi link KtStandardTypes Type
 syn keyword KtAndroidTypes ActivityManager AlertDialog AppCompatActivity Application BluetoothAdapter BluetoothDevice BluetoothManager BluetoothSocket BroadcastReceiver Bundle Button Context DataSetObserver Dialog DialogFragment EditText Editable Executor Executors Handler Intent IntentFilter LayoutInflater ListAdapter ListView LiveData Looper MenuItem Message MutableLiveData R RadioButton RadioGroup RecyclerView Service TextView TextWatcher View ViewGroup ViewModel ViewModelProvider
 hi link KtAndroidTypes Type
 
-syn region KtBlock start="{" end="}" contains=ALL
+syn region KtBlock start="{" end="}" contains=ALL fold
 hi link KtBlock Delimiter
 
 syn region KtParen start="(" end=")" contains=ALL
