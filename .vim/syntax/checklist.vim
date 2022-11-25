@@ -1,8 +1,11 @@
 syn match ChlTrue /^.*\<Y\>.*$/
-hi ChlTrue guifg=#00FF00 guibg=#224400 gui=bold
-
-syn match ChlFalse /^.*\<N\>.*$/
-hi ChlFalse guifg=#FF0000 guibg=#442200 gui=bold
+hi link ChlTrue Good
 
 syn match ChlMaybe /^.*\<M\>.*$/
-hi ChlMaybe guifg=#FFFF00 guibg=#333300 gui=bold
+hi link ChlMaybe Maybe
+
+syn match ChlFalse /^.*\<N\>.*$/
+hi link ChlFalse Bad
+
+syn match ChlNotApplicable ".*\<N/A\>.*$"
+hi link ChlNotApplicable Irrelevant

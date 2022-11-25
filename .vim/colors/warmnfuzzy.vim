@@ -5,7 +5,8 @@ set background=dark
 if exists("syntax_on")
 	syntax reset
 endif
-let g:colors_name = "custom"
+
+let g:colors_name = "warmnfuzzy"
 
 hi Constant guifg=#FF4422
 hi String guifg=#AA44FF
@@ -44,3 +45,8 @@ hi Function guifg=#FF4488 gui=Bold term=Bold
 
 hi Folded guibg=#331100
 hi SignColumn guibg=#1C1616
+
+hi Bad guifg=#FF0000 guibg=#442200 gui=bold
+hi Good guifg=#00FF00 guibg=#224400 gui=bold
+hi Irrelevant guifg=#666666
+hi Maybe guifg=#FFFF00 guibg=#333300 gui=bold
