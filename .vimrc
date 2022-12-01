@@ -9,9 +9,10 @@ set formatoptions=croq
 
 filetype indent on
 
-if &t_Co >= 256
+colo warmnfuzzy
+
+if &t_Co >= 256 && exists('&termguicolors')
 	set termguicolors
-	colo warmnfuzzy
 endif
 
 au! BufWritePre * %s/\s\+$//e
