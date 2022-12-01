@@ -17,7 +17,7 @@ endif
 
 au! BufWritePre * %s/\s\+$//e
 
-set tags=./tags;/
+set tags=./tags;/,tags
 
 if has('nvim')
 	set showmode

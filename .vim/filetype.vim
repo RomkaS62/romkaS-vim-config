@@ -3,3 +3,4 @@ if exists("did_load_filetypes")
 endif
 
 au! BufRead,BufNewFile *.kt setfiletype kt
+au! BufRead,BufNewFile *.conf setfiletype conf
