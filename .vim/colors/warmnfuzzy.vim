@@ -43,7 +43,8 @@ hi LineNr guifg=#004488
 
 hi Function guifg=#FF4488 gui=Bold term=Bold
 
-hi Folded guibg=#331100
+hi Folded guifg=#883333 guibg=#331100
+
 hi SignColumn guibg=#1C1616
 
 hi Bad guifg=#FF0000 guibg=#442200 gui=bold

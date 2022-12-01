@@ -1,11 +1,11 @@
-syn match ChlTrue /^.*\<Y\>.*$/
+syn match ChlTrue /[^\t ].*\<Y\>.*$/
 hi link ChlTrue Good
 
-syn match ChlMaybe /^.*\<M\>.*$/
+syn match ChlMaybe /[^\t ].*\<M\>.*$/
 hi link ChlMaybe Maybe
 
-syn match ChlFalse /^.*\<N\>.*$/
+syn match ChlFalse /[^\t ].*\<N\>.*$/
 hi link ChlFalse Bad
 
-syn match ChlNotApplicable ".*\<N/A\>.*$"
+syn match ChlNotApplicable "[^\t ].*\<N/A\>.*$"
 hi link ChlNotApplicable Irrelevant

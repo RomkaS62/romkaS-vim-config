@@ -7,6 +7,8 @@ set nohlsearch
 set ts=4 sw=4
 set formatoptions=croq
 
+filetype indent on
+
 if &t_Co >= 256
 	set termguicolors
 	colo warmnfuzzy

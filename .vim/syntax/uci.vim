@@ -1,9 +1,17 @@
-syn match UCIString /'[^']\+'/
-hi link UCIString String
+if exists("b:current_syntax")
+	finish
+endif
 
-syn match UCIOption /^\t\(option\|list\)/ contained
+syn match UCIValue /'[^']\+'\|"[^"]\+"\|[^# \t]\+/ contained
+hi link UCIValue String
+
+syn match UCIIdentifier /[a-zA-Z_-][a-zA-Z_0-9-]*/ contained nextgroup=UCIValue skipwhite
+hi link UCIIdentifier Identifier
+
+syn keyword UCIOption config option list nextgroup=UCIIdentifier skipwhite
 hi link UCIOption StorageClass
 
-syn keyword UCIConfigKeyword config contained
-syn region UCIConfig start=/^config/ end=/\n\s*\n/ contains=UCIConfigKeyword,UCIString,UCIOption
-hi link UCIConfigKeyword StorageClass
+syn region UCIComment start=/#/ end="\n"
+hi link UCIComment Comment
+
+let b:current_syntax="uci"

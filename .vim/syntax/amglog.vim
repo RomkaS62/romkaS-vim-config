@@ -8,16 +8,19 @@ hi link AmgLogInfoMsg Comment
 syn match AmgLogWarnMsg /^\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\] *\[ *WARN *\] *\[[A-Za-z_0-9]\+.*$/
 hi AmgLogWarnMsg guifg=#FFFF00
 
-syn match AmgLogErrorMsg /^\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\] *\[ *ERROR *\] *\[[A-Za-z_0-9]\+.*$/
+syn match AmgLogErrorMsg /^\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\] *\[ *\(ERROR\|FATAL\) *\] *\[[A-Za-z_0-9]\+.*$/
 hi link AmgLogErrorMsg Error
 
-syn region AmgDbgMsgOutput start=/./ end=/\$\$\$/ contained
-hi link AmgDbgMsgOutput String
+syn match AmgDbgMsgContent /\([^\$]\|\$[^\$]\|\$\$[^\$]\)/ contained
+hi link AmgDbgMsgContent String
+
+syn region AmgDbgMsgOutput start=/ / end=/\$\$\$/ contained contains=AmgDbgMsgContent
+hi link AmgDbgMsgOutput Ignore
 
 syn match AmgLine /@[0-9]\+>/ contained nextgroup=AmgDbgMsgOutput
 hi link AmgLine Label
 
-syn match AmgPath /\(\/[^\/]\+\)\+\.\(cpp\|h\)\>/ contained nextgroup=AmgLine
+syn match AmgPath /\(\.\+\)\=\(\/\+[^\/]\+\)\+\.\(cpp\|h\)\>/ contained nextgroup=AmgLine
 hi link AmgPath Constant
 
 syn match AmgDebugOutput /^\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\] *\[ *INFO *\] *\[DEBUG\]: */ nextgroup=AmgPath
