@@ -8,6 +8,7 @@ set ts=4 sw=4
 set formatoptions=croq
 
 filetype indent on
+syntax on
 
 colo warmnfuzzy
 
@@ -37,4 +38,3 @@ if has('nvim')
 
 	au! WinEnter * call EnterInsertIfTerminal()
 endif
-

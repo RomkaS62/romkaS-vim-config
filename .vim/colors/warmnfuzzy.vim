@@ -28,24 +28,21 @@ hi Exception ctermfg=Red guifg=#FF4400
 
 hi Type ctermfg=LightGreen guifg=#77FF44
 
-hi SpecialKey ctermfg=DarkBlue guifg=#004080
-hi ColorColumn ctermbg=DarkGray guibg=#361818
-
 hi PreProc ctermfg=Magenta guifg=#FF66BB
 hi Define ctermfg=Red guifg=#FF0000 gui=Bold cterm=Bold
 hi Macro ctermfg=Red guifg=#FF0000 gui=Bold cterm=Bold
 hi Include ctermfg=Grey guifg=#8080A0
 hi PreCondit ctermfg=Yellow guifg=#FF9944
 
-hi Normal ctermfg=LightGray guifg=#EEEEEE guibg=#1C1616
-
-hi LineNr ctermfg=DarkBlue guifg=#004488
-
 hi Function ctermfg=LightRed guifg=#FF4488 gui=Bold term=Bold
 
+hi Normal ctermfg=LightGray guifg=#EEEEEE guibg=#1C1616
+hi ColorColumn ctermbg=DarkGray guibg=#361818
 hi Folded ctermfg=DarkGray ctermbg=Black guifg=#883333 guibg=#331100
-
+hi LineNr ctermfg=DarkBlue guifg=#004488
 hi SignColumn ctermbg=DarkGray guibg=#1C1616
+hi SpecialKey ctermfg=DarkBlue guifg=#004080
+hi CursorLine guibg=#282121
 
 hi Bad guifg=#FF0000 guibg=#442200 gui=bold
 hi Good guifg=#00FF00 guibg=#224400 gui=bold
