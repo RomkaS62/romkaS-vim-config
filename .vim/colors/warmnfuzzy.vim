@@ -44,6 +44,9 @@ hi SignColumn ctermbg=DarkGray guibg=#1C1616
 hi SpecialKey ctermfg=DarkBlue guifg=#004080
 hi CursorLine guibg=#282121
 
+hi Pmenu guibg=#664422
+hi PmenuSel guibg=#883300
+
 hi Bad guifg=#FF0000 guibg=#442200 gui=bold
 hi Good guifg=#00FF00 guibg=#224400 gui=bold
 hi Irrelevant guifg=#666666
