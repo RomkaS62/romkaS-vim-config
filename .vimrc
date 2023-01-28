@@ -27,14 +27,4 @@ if has('nvim')
 
 	lua require('plugins')
 	lua require('clangdconf')
-
-	tnoremap <Esc> <C-\><C-n>
-
-	function EnterInsertIfTerminal()
-		if &buftype == 'terminal'
-			startinsert
-		endif
-	endfunction
-
-	au! WinEnter * call EnterInsertIfTerminal()
 endif
