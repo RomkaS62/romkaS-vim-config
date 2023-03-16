@@ -1,4 +1,4 @@
-set colorcolumn=80
+set colorcolumn=80,120
 set autoindent
 set number
 set list
@@ -6,6 +6,10 @@ set listchars=tab:>-,trail:~
 set nohlsearch
 set ts=4 sw=4
 set formatoptions=croq
+set mouse=
+
+let s:esc_to_exit_terminal = 0
+let s:insert_on_terminal_window_entry = 0
 
 filetype indent on
 syntax on
@@ -16,7 +20,13 @@ if &t_Co >= 256 && exists('&termguicolors')
 	set termguicolors
 endif
 
-au! BufWritePre * %s/\s\+$//e
+function RemoveTrailingWhitespace()
+	if &filetype != 'diff'
+		%s/\s\+$//e
+	endif
+endfunction
+
+au! BufWritePre * call RemoveTrailingWhitespace()
 
 set tags=./tags;/,tags
 
@@ -28,13 +38,19 @@ if has('nvim')
 	lua require('plugins')
 	lua require('clangdconf')
 
-	tnoremap <Esc> <C-\><C-n>
+	if s:esc_to_exit_terminal
+		tnoremap <Esc> <C-\><C-n>
+	endif
 
-	function EnterInsertIfTerminal()
-		if &buftype == 'terminal'
-			startinsert
-		endif
-	endfunction
+	if s:insert_on_terminal_window_entry
+		function EnterInsertIfTerminal()
+			if &buftype == 'terminal'
+				startinsert
+			endif
+		endfunction
 
-	au! WinEnter * call EnterInsertIfTerminal()
+		au! WinEnter * call EnterInsertIfTerminal()
+	endif
+else
+	au! TerminalWinOpen * setlocal nonumber
 endif
