@@ -1,1 +1,0 @@
-/home/net-mazeikisra/.vimrc

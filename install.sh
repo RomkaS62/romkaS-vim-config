@@ -25,7 +25,7 @@ ln -s "$PWD/.vim" "$HOME/.vim"
 ln -s "$PWD/.vimrc" "$HOME/.vimrc"
 ln -s "$HOME/.vimrc" "$PWD/.vim/init.vim"
 
-rm -rf "/home/gramelis/.local/share/nvim/"
+rm -rf "$HOME/.local/share/nvim/"
 NVIM_PLUGIN_DIR="$HOME/.local/share/nvim/site/pack/packer/start"
 mkdir -p "$NVIM_PLUGIN_DIR" 2> /dev/null
 (cd "$NVIM_PLUGIN_DIR" && git clone "https://github.com/wbthomason/packer.nvim.git")
