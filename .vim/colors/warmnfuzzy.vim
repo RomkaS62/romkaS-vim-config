@@ -24,7 +24,7 @@ hi link Repeat Conditional
 hi link Label Conditional
 hi Conditional ctermfg=Yellow guifg=#FFEE33 gui=Bold cterm=Bold
 hi Operator ctermfg=DarkYellow guifg=#FFAA44 gui=Bold cterm=Bold
-hi Exception ctermfg=Red guifg=#FF4400
+hi Exception ctermfg=Red guifg=#FF4400 gui=Bold cterm=Bold
 
 hi Type ctermfg=LightGreen guifg=#77FF44
 
