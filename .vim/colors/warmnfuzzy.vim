@@ -9,12 +9,12 @@ endif
 let g:colors_name = "warmnfuzzy"
 
 hi Constant ctermfg=LightRed guifg=#FF4422
-hi String ctermfg=Magenta guifg=#AA44FF
+hi String ctermfg=Magenta guifg=#77BBFF
 hi Character ctermfg=LightRed guifg=#AA5599
 
-hi Comment ctermfg=DarkRed guifg=#884488
+hi Comment ctermfg=DarkRed guifg=#CC9999
 
-hi Special ctermfg=LightMagenta guifg=#FF88AA
+hi Special ctermfg=LightMagenta guifg=#FF88FF
 hi Delimiter ctermfg=LightMagenta guifg=#FF77FF
 
 hi Identifier ctermfg=LightGray guifg=#EE55EE
