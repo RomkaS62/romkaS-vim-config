@@ -51,3 +51,7 @@ hi Bad guifg=#FF0000 guibg=#442200 gui=bold
 hi Good guifg=#00FF00 guibg=#224400 gui=bold
 hi Irrelevant guifg=#666666
 hi Maybe guifg=#FFFF00 guibg=#333300 gui=bold
+
+" Diff specific highlighting
+hi diffAdded guifg=#00FF00
+hi diffRemoved guifg=#FF4444
