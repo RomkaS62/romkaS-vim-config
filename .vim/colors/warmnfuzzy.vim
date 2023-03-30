@@ -12,7 +12,7 @@ hi Constant ctermfg=LightRed guifg=#FF4422
 hi String ctermfg=Magenta guifg=#77BBFF
 hi Character ctermfg=LightRed guifg=#AA5599
 
-hi Comment ctermfg=DarkRed guifg=#CC9999
+hi Comment ctermfg=DarkRed guifg=#887777
 
 hi Special ctermfg=LightMagenta guifg=#FF88FF
 hi Delimiter ctermfg=LightMagenta guifg=#FF77FF
