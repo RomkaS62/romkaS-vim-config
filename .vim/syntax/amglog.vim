@@ -5,10 +5,10 @@ endif
 syn match AmgLogInfoMsg /^\c\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\] *\[.*\] *\[[A-Za-z_0-9]\+.*$/
 hi link AmgLogInfoMsg Comment
 
-syn match AmgLogWarnMsg /^\c\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\] *\[ *WARN *\] *\[[A-Za-z_0-9]\+.*$/
+syn match AmgLogWarnMsg /^\c\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\].*\<WARN.*]: \+.*$/
 hi AmgLogWarnMsg guifg=#FFFF00
 
-syn match AmgLogErrorMsg /^\c\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\] *\[ *\(ERROR\|FATAL\) *\] *\[[A-Za-z_0-9]\+.*$/
+syn match AmgLogErrorMsg /^\c\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\].*\(\<ERROR\|\<FATAL\).*]: \+.*$/
 hi link AmgLogErrorMsg Error
 
 syn match AmgLine /@[0-9]\+>/ contained
