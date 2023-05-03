@@ -14,9 +14,15 @@ function! CMakeIncludeToPath(directive)
 	endif
 
 	if is_inlcude_directive
-		let ret = substitute(a:directive, '^\c\s*include\_s*(\_s*\("\(\f\+\)"\|\(\f\+\)\)\_s*)\s*$', '\2\3', '')
+		let ret = substitute(a:directive,
+				\	'^\c\s*include\_s*(\_s*\("\(\f\+\)"\|\(\f\+\)\)\_s*)\_s*$',
+				\	'\2\3',
+				\	'')
 	elseif is_add_subdir_directive
-		let ret = substitute(a:directive, '^\c\s*add_subdirectory\_s*(\_s*\("\(\f\+\)"\|\(\f\+\)\)\_s*)\s*$', '\2\3/CMakeLists.txt', '')
+		let ret = substitute(a:directive,
+				\	'^\c\s*add_subdirectory\_s*(\_s*\("\(\f\+\)"\|\(\f\+\)\)\_s*)\_s*$',
+				\	'\2\3/CMakeLists.txt',
+				\	'')
 	endif
 
 	return ret
@@ -24,12 +30,12 @@ endfunction
 
 augroup CMake
 	au!
-	au BufRead,BufNewFile *.cmake,CMakeLists.txt set include=\\c\\zs\\(add_subdirectory\\\|include\\)\\s*(.*\\ze
-	au BufRead,BufNewFile *.cmake,CMakeLists.txt set includeexpr=CMakeIncludeToPath(v:fname)
+	au BufRead,BufNewFile *.cmake,CMakeLists.txt setlocal include=\\c\\zs\\(add_subdirectory\\\|include\\)\\s*(.*\\ze
+	au BufRead,BufNewFile *.cmake,CMakeLists.txt setlocal includeexpr=CMakeIncludeToPath(v:fname)
 augroup END
 
 augroup Java
 	au!
-	au BufRead,BufNewFile *.java set include=^\\s*import\\s*\\zs\\w\\+\\(\\.\\w\\+\\)*\\ze\\s*;\\s*$
-	au BufRead,BufNewFile *.java set includeexpr=substitute(substitute(v:fname,'\\.','/','g'),'$','.java','')
+	au BufRead,BufNewFile *.java setlocal include=^\\s*import\\s*\\zs\\w\\+\\(\\.\\w\\+\\)*\\ze\\s*;\\s*$
+	au BufRead,BufNewFile *.java setlocal includeexpr=substitute(substitute(v:fname,'\\.','/','g'),'$','.java','')
 augroup END
