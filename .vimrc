@@ -8,7 +8,9 @@ set ts=4 sw=4
 set formatoptions=croq
 set mouse=
 set autoread
+
 set cursorline
+set cursorlineopt=number
 
 let s:esc_to_exit_terminal = 0
 let s:insert_on_terminal_window_entry = 0

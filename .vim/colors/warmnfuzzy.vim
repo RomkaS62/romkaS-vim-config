@@ -40,6 +40,7 @@ hi Normal ctermfg=LightGray guifg=#EEEEEE guibg=#1C1616
 hi ColorColumn ctermbg=DarkGray guibg=#361818
 hi Folded ctermfg=DarkGray ctermbg=Black guifg=#883333 guibg=#331100
 hi LineNr ctermfg=DarkBlue guifg=#004488
+hi CursorLineNr ctermfg=LightBlue guifg=#44AAFF
 hi SignColumn ctermbg=DarkGray guibg=#1C1616
 hi SpecialKey ctermfg=DarkBlue guifg=#004080
 hi CursorLine guibg=#282121
