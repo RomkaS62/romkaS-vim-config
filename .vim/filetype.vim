@@ -37,5 +37,21 @@ augroup END
 augroup Java
 	au!
 	au BufRead,BufNewFile *.java setlocal include=^\\s*import\\s*\\zs\\w\\+\\(\\.\\w\\+\\)*\\ze\\s*;\\s*$
-	au BufRead,BufNewFile *.java setlocal includeexpr=substitute(substitute(v:fname,'\\.','/','g'),'$','.java','')
+	au BufRead,BufNewFile *.java setlocal includeexpr=substitute(v:fname,'\\.','/','g')
+	au BufRead,BufNewFile *.java setlocal suffixesadd=.java
+augroup END
+
+augroup GrLua
+	au!
+	au BufRead,BufNewFile *.lua setlocal path=.,,/usr/share/lua/*,/usr/local/lib/lua,/usr/share/lua/*
+	au BufRead,BufNewFile *.lua setlocal include=^\\w\\+\\s*=\\s*require\\s*(\\=\\s*'
+	au BufRead,BufNewFile *.lua setlocal suffixesadd=.lua
+augroup END
+
+augroup Python
+	au!
+	au BufRead,BufNewFile *.py setlocal path=.,,/usr/local/lib/*/dist-packages
+	au BufRead,BufNewFile *.py setlocal include=^\\(import\\|from\\)\\s\\+\\zs\\w\\+\\ze.*
+	au BufRead,BufNewFile *.py setlocal includeexpr=substitute(v:fname,'\\.','/','g')
+	au BufRead,BufNewFile *.py setlocal suffixesadd=.py,/__init__.py
 augroup END
