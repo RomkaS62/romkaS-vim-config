@@ -7,6 +7,10 @@ function! GoToSource(path)
 		return
 	endif
 
+	if is_absolute_path
+		let nodes = [ '' ] + nodes
+	endif
+
 	let filename = nodes[-1]
 	let basename = substitute(filename, '\(.*\)\.\a\+$', '\1', '')
 	let extension = substitute(filename, '.*\(\.\a\+\)$', '\1', '')
@@ -15,19 +19,14 @@ function! GoToSource(path)
 		return
 	endif
 
-	let target_path = join(nodes[0:-2] + [ basename . '.cpp' ], '/')
+	for extension in [ '.cpp', 'c' ]
+		let target_path = join(nodes[0:-2] + [ basename . extension ], '/')
 
-	if filereadable(target_path)
-		exec 'e' target_path
-		return
-	endif
-
-	let target_path = join(nodes[0:-2] + [ basename . '.c' ], '/')
-
-	if filereadable(target_path)
-		exec 'e' target_path
-		return
-	endif
+		if filereadable(target_path)
+			exec 'e' target_path
+			return
+		endif
+	endfor
 
 	let i = len(nodes) - 1
 
@@ -44,27 +43,15 @@ function! GoToSource(path)
 		return
 	endif
 
-	let target_search_path = join(nodes[0:i], '/')
+	for extension in [ '.cpp', '.c' ]
+		let target_search_path = join(nodes[0:i], '/')
+		let target_path = findfile(basename . extension, target_search_path)
 
-	if is_absolute_path
-		let target_search_path = '/' . target_search_path
-	endif
-
-	let target_path = findfile(basename . '.cpp', target_search_path)
-
-	if filereadable(target_path)
-		exec 'e' target_path
-		return
-	endif
-
-	let target_path = findfile(basename, '.c', target_search_path)
-
-	if filereadable(target_path)
-		exec 'e' target_path
-		return
-	endif
-
-	echo 'File not readable: ' . target_path
+		if filereadable(target_path)
+			exec 'e' target_path
+			return
+		endif
+	endfor
 endfunction
 
 nmap gs :call<Space>GoToSource(bufname())<CR>
