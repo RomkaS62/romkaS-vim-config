@@ -15,24 +15,26 @@ function! GoToSource(path)
 		return
 	endif
 
-	let nodes[-1] = basename . '.cpp'
+	let target_file = basename . '.cpp'
 
 	let i = len(nodes) - 1
 
 	while i >= 0
 		if match(nodes[i], '^include\(\w\+\)\=$') != -1
-			let nodes[i] = 'src'
+			let nodes[i] = '**'
 			break
 		endif
 
 		let i = i - 1
 	endwhile
 
-	let target_path = join(nodes, '/')
+	let target_search_path = join(nodes[0:i], '/')
 
 	if is_absolute_path
-		let target_path = '/' . target_path
+		let target_search_path = '/' . target_search_path
 	endif
+
+	let target_path = findfile(target_file, target_search_path)
 
 	if filereadable(target_path)
 		exec 'e' target_path
