@@ -1,4 +1,4 @@
-function! GoToSource(path)
+function! FindSource(path)
 	let path = simplify(a:path)
 	let is_absolute_path = path[0] == '/'
 	let nodes = split(path, '/', 0)
@@ -23,8 +23,7 @@ function! GoToSource(path)
 		let target_path = join(nodes[0:-2] + [ basename . extension ], '/')
 
 		if filereadable(target_path)
-			exec 'e' target_path
-			return
+			return target_path
 		endif
 	endfor
 
@@ -48,10 +47,36 @@ function! GoToSource(path)
 		let target_path = findfile(basename . extension, target_search_path)
 
 		if filereadable(target_path)
-			exec 'e' target_path
-			return
+			return target_path
 		endif
 	endfor
 endfunction
 
-nmap gs :call<Space>GoToSource(bufname())<CR>
+let s:sources_by_headers = {}
+
+" Cache hits.
+" Remove entries if referenced file no longer exists and try again.
+function! GoToSource(header_path)
+	let simplified_path = simplify(a:header_path)
+
+	if has_key(s:sources_by_headers, simplified_path)
+		let source_path = s:sources_by_headers[simplified_path]
+
+		if !filereadable(source_path)
+			unlet s:sources_by_headers[source_path]
+			GoToSource(simplified_path)
+			return
+		endif
+
+		exec 'e' source_path
+	else
+		let source_path = FindSource(simplified_path)
+
+		if !empty(source_path)
+			let s:sources_by_headers[simplified_path] = source_path
+			exec 'e' source_path
+		endif
+	endif
+endfunction
+
+nmap gs :call<Space>GoToSource(expand('%:p'))<CR>
