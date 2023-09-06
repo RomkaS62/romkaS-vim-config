@@ -15,7 +15,19 @@ function! GoToSource(path)
 		return
 	endif
 
-	let target_file = basename . '.cpp'
+	let target_path = join(nodes[0:-2] + [ basename . '.cpp' ], '/')
+
+	if filereadable(target_path)
+		exec 'e' target_path
+		return
+	endif
+
+	let target_path = join(nodes[0:-2] + [ basename . '.c' ], '/')
+
+	if filereadable(target_path)
+		exec 'e' target_path
+		return
+	endif
 
 	let i = len(nodes) - 1
 
@@ -28,19 +40,31 @@ function! GoToSource(path)
 		let i = i - 1
 	endwhile
 
+	if i < 0
+		return
+	endif
+
 	let target_search_path = join(nodes[0:i], '/')
 
 	if is_absolute_path
 		let target_search_path = '/' . target_search_path
 	endif
 
-	let target_path = findfile(target_file, target_search_path)
+	let target_path = findfile(basename . '.cpp', target_search_path)
 
 	if filereadable(target_path)
 		exec 'e' target_path
-	else
-		echo 'File not readable: ' . target_path
+		return
 	endif
+
+	let target_path = findfile(basename, '.c', target_search_path)
+
+	if filereadable(target_path)
+		exec 'e' target_path
+		return
+	endif
+
+	echo 'File not readable: ' . target_path
 endfunction
 
 nmap gs :call<Space>GoToSource(bufname())<CR>
