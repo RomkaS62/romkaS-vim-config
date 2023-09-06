@@ -58,3 +58,5 @@ if has('nvim')
 else
 	au! TerminalWinOpen * setlocal nonumber
 endif
+
+so ~/.vim/goto-source.vim
