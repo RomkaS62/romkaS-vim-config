@@ -7,22 +7,9 @@ let g:source_search_path .= ',./src/**;'
 " Last resort :)
 let g:source_search_path .= ',./**;'
 
-function! FindSource(path)
-	let path = simplify(a:path)
-	let is_absolute_path = path[0] == '/'
-	let nodes = split(path, '/', 0)
-
-	if len(nodes) == 0
-		return
-	endif
-
-	if is_absolute_path
-		let nodes = [ '' ] + nodes
-	endif
-
-	let filename = nodes[-1]
-	let basename = substitute(filename, '\(.*\)\.\a\+$', '\1', '')
-	let extension = substitute(filename, '.*\(\.\a\+\)$', '\1', '')
+function! FindSource(filename)
+	let basename = substitute(a:filename, '\(.*\)\.\a\+$', '\1', '')
+	let extension = substitute(a:filename, '.*\(\.\a\+\)$', '\1', '')
 
 	if basename == '' || extension != '.h'
 		return
@@ -72,4 +59,4 @@ function! ListSourceMappings()
 	endfor
 endfunction
 
-nmap gs :call<Space>GoToSource(expand('%:p'))<CR>
+nmap gs :call<Space>GoToSource(expand('%:t'))<CR>
