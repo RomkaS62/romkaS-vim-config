@@ -28,14 +28,6 @@ function! FindSource(path)
 		return
 	endif
 
-	for extension in [ '.cpp', 'c' ]
-		let target_path = join(nodes[0:-2] + [ basename . extension ], '/')
-		if filereadable(target_path)
-			echo 'Source in same directory'
-			return target_path
-		endif
-	endfor
-
 	for extension in [ '.cpp', '.c' ]
 		let target_path = findfile(basename . extension, g:source_search_path)
 
