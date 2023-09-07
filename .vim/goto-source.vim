@@ -4,10 +4,6 @@ let g:source_search_path = ''
 " find what you're looking for there.
 let g:source_search_path .= ',./src/**;'
 
-" RMS specific
-let g:source_search_path .= ',./package/**;rms_backend'
-let g:source_search_path .= ',./depend-dev/**;rms_backend'
-
 " Last resort :)
 let g:source_search_path .= ',./**;'
 
