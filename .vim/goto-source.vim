@@ -8,10 +8,10 @@ let g:source_search_path .= ',./src/**;'
 let g:source_search_path .= ',./**;'
 
 function! FindSource(filename)
-	let basename = substitute(a:filename, '\(.*\)\.\a\+$', '\1', '')
-	let extension = substitute(a:filename, '.*\(\.\a\+\)$', '\1', '')
+	let basename = fnamemodify(a:filename, ':t:r')
+	let extension = fnamemodify(a:filename, ':t:e')
 
-	if basename == '' || extension != '.h'
+	if basename == '' || extension != 'h'
 		return
 	endif
 
@@ -47,7 +47,7 @@ function! GoToSource(header_path)
 		let source_path = FindSource(simplified_path)
 
 		if !empty(source_path)
-			let s:sources_by_headers[simplified_path] = source_path
+			let s:sources_by_headers[simplified_path] = fnamemodify(source_path, ':p')
 			exec 'e' source_path
 		endif
 	endif
@@ -59,4 +59,4 @@ function! ListSourceMappings()
 	endfor
 endfunction
 
-nmap gs :call<Space>GoToSource(expand('%:t'))<CR>
+nmap gs :call<Space>GoToSource(expand('%:p'))<CR>
