@@ -1,3 +1,16 @@
+let g:source_search_path = ''
+
+" If there's a directory called 'src' just above there's a good chance you'll
+" find what you're looking for there.
+let g:source_search_path .= ',./src/**;'
+
+" RMS specific
+let g:source_search_path .= ',./package/**;rms_backend'
+let g:source_search_path .= ',./depend-dev/**;rms_backend'
+
+" Last resort :)
+let g:source_search_path .= ',./**;'
+
 function! FindSource(path)
 	let path = simplify(a:path)
 	let is_absolute_path = path[0] == '/'
@@ -21,32 +34,17 @@ function! FindSource(path)
 
 	for extension in [ '.cpp', 'c' ]
 		let target_path = join(nodes[0:-2] + [ basename . extension ], '/')
-
 		if filereadable(target_path)
+			echo 'Source in same directory'
 			return target_path
 		endif
 	endfor
 
-	let i = len(nodes) - 1
-
-	while i >= 0
-		if match(nodes[i], '^include\(\w\+\)\=$') != -1
-			let nodes[i] = '**'
-			break
-		endif
-
-		let i = i - 1
-	endwhile
-
-	if i < 0
-		return
-	endif
-
 	for extension in [ '.cpp', '.c' ]
-		let target_search_path = join(nodes[0:i], '/')
-		let target_path = findfile(basename . extension, target_search_path)
+		let target_path = findfile(basename . extension, g:source_search_path)
 
 		if filereadable(target_path)
+			echo 'Source found in path'
 			return target_path
 		endif
 	endfor
@@ -68,6 +66,7 @@ function! GoToSource(header_path)
 			return
 		endif
 
+		echo 'Source found in cache'
 		exec 'e' source_path
 	else
 		let source_path = FindSource(simplified_path)
@@ -77,6 +76,12 @@ function! GoToSource(header_path)
 			exec 'e' source_path
 		endif
 	endif
+endfunction
+
+function! ListSourceMappings()
+	for header in keys(s:sources_by_headers)
+		echo header . " --> " . s:sources_by_headers[header]
+	endfor
 endfunction
 
 nmap gs :call<Space>GoToSource(expand('%:p'))<CR>
