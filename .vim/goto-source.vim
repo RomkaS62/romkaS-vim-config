@@ -15,14 +15,16 @@ function! FindSource(filename)
 		return
 	endif
 
-	for extension in [ '.cpp', '.c' ]
-		let target_path = findfile(basename . extension, g:source_search_path)
+	setlocal suffixesadd=.c,.cpp
+	let target_path = findfile(basename, g:source_search_path)
 
-		if filereadable(target_path)
-			echo 'Source found in path'
-			return target_path
-		endif
-	endfor
+	if !filereadable(target_path)
+		let target_path = ''
+	else
+		echo 'Source found in path'
+	endif
+
+	return target_path
 endfunction
 
 let s:sources_by_headers = {}
