@@ -2,22 +2,21 @@ if exists("b:current_syntax")
 	finish
 endif
 
-syn match AmgLogInfoMsg /^\c\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\] *\[.*\] *\[[A-Za-z_0-9]\+.*$/
-hi link AmgLogInfoMsg Comment
+syn region AmglogSquareBracketBlock start=/\[/ end=/\]/
 
-syn match AmgLogWarnMsg /^\c\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\].*\<WARN.*]: \+.*$/
-hi AmgLogWarnMsg guifg=#FFFF00
+syn region AmglogEntity start=/\[/ end=/\]:/ contained keepend
+hi link AmglogEntity Identifier
 
-syn match AmgLogErrorMsg /^\c\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\].*\(\<ERROR\|\<FATAL\).*]: \+.*$/
-hi link AmgLogErrorMsg Error
+syn match AmglogInfoTag /\[ INFO \]/ contained nextgroup=AmglogEntity skipwhite
+hi link AmglogInfoTag Comment
 
-syn match AmgLine /@[0-9]\+>/ contained
-hi link AmgLine Label
+syn match AmglogWarningTag /\[ WARNING \]/ contained nextgroup=AmglogEntity skipwhite
+hi link AmglogWarningTag Todo
 
-syn match AmgPath /\(\.\+\)\=\(\/\+[^\/]\+\)\+\.\(cpp\|h\)\>/ contained nextgroup=AmgLine
-hi link AmgPath Constant
+syn match AmglogErrorTag /\[ ERROR \]/ contained nextgroup=AmglogEntity skipwhite
+hi link AmglogErrorTag Error
 
-syn match AmgDebugOutput /\c^\[[0-9][0-9]:[0-9][0-9]:[0-9][0-9]\] *\[ *INFO *\] *\[DEBUG\]: */ nextgroup=AmgPath
-hi link AmgDebugOutput PreProc
+syn match AmglogTimestamp /^\[ \d\+-\w\+-\d\+ \d\+:\d\+:\d\+\(\.\d\+\)\= \]/ nextgroup=AmglogInfoTag,AmglogWarningTag,AmglogErrorTag skipwhite
+hi link AmglogTimestamp Comment
 
 let b:current_syntax = "amglog"
