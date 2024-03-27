@@ -1,12 +1,3 @@
-let g:source_search_path = ''
-
-" If there's a directory called 'src' just above there's a good chance you'll
-" find what you're looking for there.
-let g:source_search_path .= ',./src/**;'
-
-" Last resort :)
-let g:source_search_path .= ',./**;'
-
 function! FindSource(filename)
 	let basename = fnamemodify(a:filename, ':t:r')
 	let extension = fnamemodify(a:filename, ':t:e')
@@ -16,7 +7,7 @@ function! FindSource(filename)
 	endif
 
 	setlocal suffixesadd=.c,.cpp
-	let target_path = findfile(basename, g:source_search_path)
+	let target_path = findfile(basename, b:source_search_path)
 
 	if !filereadable(target_path)
 		let target_path = ''
@@ -32,6 +23,11 @@ let s:sources_by_headers = {}
 " Cache hits.
 " Remove entries if referenced file no longer exists and try again.
 function! GoToSource(header_path)
+	if !exists('b:source_search_path')
+		echo 'b:source_search_path not set!'
+		return
+	endif
+
 	let simplified_path = simplify(a:header_path)
 
 	if has_key(s:sources_by_headers, simplified_path)
@@ -39,7 +35,7 @@ function! GoToSource(header_path)
 
 		if !filereadable(source_path)
 			unlet s:sources_by_headers[simplified_path]
-			GoToSource(simplified_path)
+			call GoToSource(simplified_path)
 			return
 		endif
 
@@ -51,6 +47,21 @@ function! GoToSource(header_path)
 		if !empty(source_path)
 			let s:sources_by_headers[simplified_path] = fnamemodify(source_path, ':p')
 			exec 'e' source_path
+		else
+			let new_source_path = substitute(simplified_path, '\/include\w*\/', '/src/', '')
+			let new_source_path = substitute(new_source_path, '\.h$', '.cpp', '')
+
+			if new_source_path == simplified_path
+				echo 'Cannot construct source path from ' . simplified_path
+				return
+			endif
+
+			let new_source_path = fnamemodify(new_source_path, ':.')
+			let new_source_dir = fnamemodify(new_source_path, ':h')
+
+			echo 'Source not found. Creating new file: ' . new_source_path
+			call mkdir(new_source_dir, 'p')
+			exec 'e' new_source_path
 		endif
 	endif
 endfunction
