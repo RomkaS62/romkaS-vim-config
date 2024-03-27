@@ -1,3 +1,5 @@
+let g:source_search_path = './src/**;.git'
+
 function! FindSource(filename)
 	let basename = fnamemodify(a:filename, ':t:r')
 	let extension = fnamemodify(a:filename, ':t:e')
@@ -9,10 +11,16 @@ function! FindSource(filename)
 	setlocal suffixesadd=.c,.cpp
 	let target_path = findfile(basename, b:source_search_path)
 
-	if !filereadable(target_path)
-		let target_path = ''
+	if !filereadable(target_path) && exists('g:source_search_path')
+		let target_path = findfile(basename, g:source_search_path)
+
+		if !filereadable(target_path)
+			let target_path = ''
+		else
+			echo 'Source found in global path'
+		endif
 	else
-		echo 'Source found in path'
+		echo 'Source found in buffer-local path'
 	endif
 
 	return target_path
@@ -23,8 +31,8 @@ let s:sources_by_headers = {}
 " Cache hits.
 " Remove entries if referenced file no longer exists and try again.
 function! GoToSource(header_path)
-	if !exists('b:source_search_path')
-		echo 'b:source_search_path not set!'
+	if !exists('b:source_search_path') && !exists('g:source_search_path')
+		echo 'source_search_path not set!'
 		return
 	endif
 
