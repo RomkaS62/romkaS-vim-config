@@ -55,3 +55,8 @@ augroup Python
 	au BufRead,BufNewFile *.py setlocal includeexpr=substitute(v:fname,'\\.','/','g')
 	au BufRead,BufNewFile *.py setlocal suffixesadd=.py,/__init__.py
 augroup END
+
+augroup CMakeCache
+	au!
+	au BufRead,BufNewFile CMakeCache.txt setlocal filetype=cmakecache
+augroup END

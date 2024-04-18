@@ -80,4 +80,8 @@ function! ListSourceMappings()
 	endfor
 endfunction
 
+function! ClearSourceCache()
+	let s:sources_by_headers = {}
+endfunction
+
 nmap gs :call<Space>GoToSource(expand('%:p'))<CR>
